@@ -25,7 +25,7 @@
                             <label for="usuario" class="col-md-4 control-label">Nuevo Usuario</label>
 
                             <div class="col-md-6">
-                                <input id="usuario" type="usuario" class="form-control" name="usuario" value="{{ $usuario or old('usuario') }}" required autofocus>
+                                <input id="usuario" type="usuario" class="form-control" name="usuario" value="{{ $usuario ?? old('usuario') }}" required autofocus>
 
                                 @if ($errors->has('usuario'))
                                     <span class="help-block">
