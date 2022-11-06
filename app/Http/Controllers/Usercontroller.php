@@ -9,7 +9,7 @@ use App\User;
 use Laracasts\Flash\Flash; 
 use Illuminate\Support\Facades\Hash;
 use Session;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 class Usercontroller extends Controller
 {
     public function __construct()

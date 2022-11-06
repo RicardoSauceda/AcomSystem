@@ -7,11 +7,13 @@ use App\Http\Controllers\Controller;
 use App\proyecto;
 use App\solicitudes;
 use Laracasts\Flash\Flash;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use App\User;
 use Session;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 use DB;
+
+
 
 class proyectocontroller extends Controller
 {
