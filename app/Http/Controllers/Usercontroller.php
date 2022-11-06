@@ -62,7 +62,7 @@ class Usercontroller extends Controller
         $departamento = $request->get('departamento');
 
 
-        $profesores = User::orderBy('id', 'DSC')
+        $profesores = User::orderBy('id', 'DESC')
 
             ->nombre($nombre)
             ->departamento($departamento)
@@ -81,7 +81,7 @@ class Usercontroller extends Controller
         $departamento = $request->get('departamento');
 
 
-        $profesores = User::orderBy('id', 'DSC')
+        $profesores = User::orderBy('id', 'DESC')
 
             ->nombre($nombre)
             ->departamento($departamento)
