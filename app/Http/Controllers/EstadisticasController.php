@@ -12,7 +12,7 @@ use Laracasts\Flash\Flash;
 use Auth;
 use Session;
 use Validator;
-use DB;
+use Illuminate\Support\Facades\DB;
 use App\solicitudes;
 use count;
 use sum;

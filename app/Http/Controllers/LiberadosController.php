@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\proyecto;
 use App\solicitudes;
 use App\Liberados;
@@ -13,7 +14,6 @@ use Validator;
 use hasFile;
 use App\acoms;
 use count;
-use DB;
 use sum;
 use App\Http\Controllers\Zipper;
 

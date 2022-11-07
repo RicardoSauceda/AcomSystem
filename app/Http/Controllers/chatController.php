@@ -1,12 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use Auth;
+use Illuminate\Support\Facades\DB;
 use App\proyecto;
 use App\chat;
-use DB;
 
 class chatController extends Controller
 {
