@@ -23,7 +23,6 @@ Route::get('loginJefe', ['as' => 'loginJefe', function (){
 }]);
 
 Route::post('/acceso', [
-
 	'uses' => 'Auth\LoginController@loginJefe',
 	'as' => 'acceso'
 ]);

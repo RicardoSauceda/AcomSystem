@@ -29,7 +29,12 @@ return [
     | well as their drivers. You may even define multiple stores for the
     | same cache driver to group types of items stored in your caches.
     |
+    | Supported drivers: "apc", "array", "database", "file",
+    |         "memcached", "redis", "dynamodb", "octane", "null"
+    |
     */
+
+
 
     'stores' => [
 
@@ -46,6 +51,7 @@ return [
             'driver' => 'database',
             'table' => 'cache',
             'connection' => null,
+            'lock_connection' => null,
         ],
 
         'file' => [
@@ -75,6 +81,7 @@ return [
         'redis' => [
             'driver' => 'redis',
             'connection' => 'cache',
+            'lock_connection' => 'default',
         ],
 
     ],
@@ -88,6 +95,10 @@ return [
         'endpoint' => env('DYNAMODB_ENDPOINT'),
     ],
 
+    'octane' => [
+        'driver' => 'octane',
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Cache Key Prefix
@@ -99,6 +110,6 @@ return [
     |
     */
 
-    'prefix' => env('CACHE_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_').'_cache'),
-    
+    'prefix' => env('CACHE_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_') . '_cache'),
+
 ];
