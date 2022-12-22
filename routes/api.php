@@ -16,3 +16,19 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::GET('Creditos/{user}', 'CreditoController@creditosByUser');
+
+Route::GET('ActividadesAut', 'CreditoController@actAutorizadas');
+
+Route::GET('ActPorUsuario/{id}', 'CreditoController@actInscritas');
+
+Route::GET('actFinalizadas/{idUsuario}', 'CreditoController@actAprov');
+
+Route::GET('eliminarSolicitud/{idSol}', 'CreditoController@cancelarSolProyeto');
+
+Route::POST('registroProy', 'CreditoController@registroProy');
+
+Route::POST('EditarPerfil', 'CreditoController@EditProfile');
+
+

@@ -12,7 +12,8 @@ use App\User;
 use Session;
 use Illuminate\Support\Facades\Validator;
 use DB;
-
+use PhpParser\Node\Expr\FuncCall;
+use Illuminate\Routing\Route;
 
 
 class proyectocontroller extends Controller
@@ -24,7 +25,7 @@ class proyectocontroller extends Controller
 
   public function store(Request $request)
   {
-    $validator = Validator::make($request -> all(), [
+    $validator = Validator::make($request->all(), [
       'nombre' => 'required|min:5|max:100',
       'rol' => 'required',
       'cantidad' => 'Integer',
@@ -34,7 +35,7 @@ class proyectocontroller extends Controller
       'descrip' => 'required',
     ]);
 
-    if ($validator -> fails()) {
+    if ($validator->fails()) {
       return redirect()->back()
         ->withErrors($validator)
         ->withInput(request(['nombre', 'rol', 'cantidad', 'inicio', 'final', 'departamento']));
@@ -81,7 +82,7 @@ class proyectocontroller extends Controller
             ->paginate(4);*/
     $user = auth()->user();
 
-    $proyectosJ = proyecto::where('id_creo', '=', $user->id)->orderBy('created_at', 'desc')->paginate(10);
+    $proyectosJ = proyecto::where('id_creo', '!=', $user->id)->orderBy('created_at', 'DESC')->paginate(10);
 
 
     return view('templates.jefe.consultarProyectos', compact('proyectosJ'));
@@ -342,5 +343,12 @@ class proyectocontroller extends Controller
 
     session()->flash('flash_message', 'El Proyecto se modifico de forma correcta');
     return redirect()->back();
+  }
+
+
+  public function actAutorizadas()
+  {    
+    $actividadesAutorizadas = DB::select("SELECT * FROM proyectos WHERE autorizacion = '1'");
+    return $actividadesAutorizadas;
   }
 }

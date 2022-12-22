@@ -10,6 +10,8 @@ use Laracasts\Flash\Flash;
 use Illuminate\Support\Facades\Hash;
 use Session;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\Controller;
+
 class Usercontroller extends Controller
 {
     public function __construct()
@@ -160,6 +162,13 @@ class Usercontroller extends Controller
        
         session()->flash('flash_message', 'El Profesor '.$nombre.' Fue Eliminado');
          return redirect()->back();
+    }
+
+    public function EditProfile($id){
+        
+        $userData = User::find($id);
+        //$profileData = DB::select("SELECT * FROM usuario WHERE usuario = $post.usu AND 'password' = $post.pass");
+        return $userData;
     }
     
 
