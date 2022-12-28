@@ -31,6 +31,20 @@
 					
 				</ul>
 			</li>
+			<li><a style="color: white;" href="<?php echo route('autorizar') ?>"><span class="iconic document"></span>Autorizar actividades</a></li>
+			<!--<li><a style="color: white;" href="<?php //echo route('liberarJ') ?>"><span class="iconic document"></span> Liberar Alumnos</a></li>-->
+			<!-- <li><a style="color: white;" href="#"><span class="iconic calendar"></span></span> Estadísticas</a>
+				<ul>
+					<li><a style="color: black;" href="<?php echo route('pastel') ?>">Por Proyectos</a></li>
+				
+					<li><a style="color: black;" href="<?php echo route('ruta') ?>">Proyectos creados por Mes</a></li>
+					
+				</ul>
+
+			</li> -->
+			<!--<li><a style="color: white;" href="<?php //echo route('aprobadosJ') ?>"><span class="iconic user"></span>Listar Liberados</a>-->
+				
+			</li>
 			<li><a style="color: white;" href="<?php echo route('liberarJ') ?>"><span class="iconic document"></span> Liberar Alumnos</a></li>
 			<li><a style="color: white;" href="#"><span class="iconic calendar"></span></span> Estadísticas</a>
 				<ul>

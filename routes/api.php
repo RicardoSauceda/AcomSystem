@@ -19,7 +19,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::GET('Creditos/{user}', 'CreditoController@creditosByUser');
 
-Route::GET('ActividadesAut', 'CreditoController@actAutorizadas');
+Route::GET('ActividadesAut', 'CreditoController@AuthorizedAct');
 
 Route::GET('ActPorUsuario/{id}', 'CreditoController@actInscritas');
 

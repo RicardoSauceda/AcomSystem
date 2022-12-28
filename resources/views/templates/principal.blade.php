@@ -38,6 +38,9 @@
                 <div class="grid justify-items-center border w-auto">
                     <a class="font-semibold text-4xl"> BIENVENIDO </a>
                     <a class="font-semibold text-4xl"> Inicie sesión </a>
+                    @section('h1')
+                        Hola
+                    @endsection
                 </div>
                 <img src="{{ asset('img/ittgLogo.png') }}" class="h-28 w-28">
             </div>
@@ -99,7 +102,7 @@
                             class="flex  text-white font-bold items-center px-2 my-auto
                         text-2sm md:text-xl lg:text-2xl xl:text-3xl
                         h-10 w-auto">
-                        Alumno</h2>
+                            Alumno</h2>
                     </div>
                 </a>
 
@@ -272,7 +275,7 @@
             top: 90px;
             left: 1160px;
         } 
-        </style>--}}
+        </style> --}}
         <script src="//code.jquery.com/jquery.js"></script>
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
         <script>

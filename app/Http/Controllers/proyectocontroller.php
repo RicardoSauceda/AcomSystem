@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\proyecto;
@@ -29,7 +30,7 @@ class proyectocontroller extends Controller
       'nombre' => 'required|min:5|max:100',
       'rol' => 'required',
       'cantidad' => 'Integer',
-      'codigo' => 'required|unique:proyectos|min:1|max:6',
+      'codigo' => 'required|unique:proyectos|min:6|max:12',
       'inicio' => 'required',
       'final' => 'required',
       'descrip' => 'required',
@@ -40,6 +41,8 @@ class proyectocontroller extends Controller
         ->withErrors($validator)
         ->withInput(request(['nombre', 'rol', 'cantidad', 'inicio', 'final', 'departamento']));
     }
+    
+    $tipo = DB::table('subtipo_acom')->select('subtipo_acom.Credito', 'tipo_acom.nombre_tipo')->join('tipo_acom', 'subtipo_acom.id_Acom', '=', 'tipo_acom.id_tipo')->where('id_sub', $request['sub'])->first();
 
     $user = auth()->user();
 
@@ -55,6 +58,9 @@ class proyectocontroller extends Controller
     $fin = $request['final'];
     $descrip = $request['descrip'];
 
+    
+    $nom_depa = DB::table('departamentos')->where('id_depat', '=', $departamento)->first();
+
     $proyecto = new proyecto();
     $proyecto->nombre = $nombre;
     $proyecto->cantidad = $cantidad;
@@ -63,6 +69,8 @@ class proyectocontroller extends Controller
     $proyecto->codigo = $codigo;
     $proyecto->autor = $user->nombre;
     $proyecto->rol_encargado = $rol;
+    
+    $proyecto['departamento'] = $nom_depa['nombre_depa'];
     $proyecto->departamento = $departamento;
     $proyecto->fecha = $fecha;
     $proyecto->fin = $fin;
@@ -140,6 +148,29 @@ class proyectocontroller extends Controller
     $proyectos = proyecto::where('id_creo', '=', $user->id)->orderBy('created_at', 'desc')->paginate(6);
 
     return view('templates.profesor.AprobadosProfesor', compact('proyectos'));
+  }
+
+  public function index7(Request $request)
+  {
+    /* $proyectos = proyecto::orderBy('id', 'ASC')
+            ->paginate(4);*/
+    $user = auth()->user();
+    $status = 0;
+    $depa = DB::table('departamentos')->where('id_Jefe', $user->id)->first();
+    $depaId = json_decode($depa);
+    $Proyectos = proyecto::where([['id_depat', $depaId->id_depat], ['autorizacion', '=', $status]])->orderBy('created_at', 'desc')->paginate(6);
+
+    //dd($Proyectos);
+
+    return view('templates.jefe.Autorizar', compact('Proyectos'));
+  }
+
+
+  public function index11(Request $request)
+  {
+    $id = $request->get('tipo');
+    $subt = DB::table('subtipo_acom')->select('id_sub', 'nombre_subtipo', 'Credito')->where('id_Acom', $id)->get();
+    return $subt;
   }
 
 
@@ -346,8 +377,9 @@ class proyectocontroller extends Controller
   }
 
 
+
   public function actAutorizadas()
-  {    
+  {
     $actividadesAutorizadas = DB::select("SELECT * FROM proyectos WHERE autorizacion = '1'");
     return $actividadesAutorizadas;
   }

@@ -68,8 +68,8 @@ class CreditoController extends Controller
 
     public function registroProy(Request $request)
     {
-        $info = $request;
-        return $info;
+        $a = $request->input('1');
+        return $a;
     }
 
 
