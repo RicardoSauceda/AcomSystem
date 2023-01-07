@@ -18,14 +18,18 @@
 	<nav style="background: #2F6895;">
 		<ul class="menu">
 			<!--li><a href="#"><span class="iconic home"></span> Inicio</a></li-->
-			<li><a style="color: white;" href="#"><span class="iconic plus-alt"></span> Registrar</a>
+			<li><a style="color: white;" href="#"><span class="iconic plus-alt"></span>Registrar</a>
 				<ul>
-					<li><a style="color: black;" href="<?php echo route('regjefe') ?>">Un JEFE</a></li>
+					<li><a style="color: black;" href="<?php echo route('regjefe') ?>">Jefe/Departamento</a></li>
+					<li><a style="color: black;" href="<?php echo route('regCarrera') ?>">Carrera</a></li>
+					
 				</ul>
 			</li>
 			<li><a style="color: white;" href="#"><span class="iconic magnifying-glass"></span>Gestionar</a>
 				<ul>
-					<li><a style="color: black;" href="<?php echo route('busqueda') ?>">Jefes Registrados</a></li>
+					<li><a style="color: black;" href="<?php echo route('busqueda') ?>">Departamentos</a></li>
+					<li><a style="color: black;" href="<?php echo route('busquedaC') ?>">Carreras</a></li>
+					
 				</ul>
 			</li>
 			<li><a style="color: white;" href="<?php echo route('Configuracion') ?>"><span class="iconic cog-alt"></span> Configuración</a></li>

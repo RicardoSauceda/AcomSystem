@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,6 +39,16 @@ Route::get('/ConsultaAutorizacionesJefe', [
 	'as' => 'autorizar',
 ]);
 
+Route::get('/AutorizarProyectoJefe/{id}', [
+	'uses' => 'proyectocontroller@index8',
+	'as' => 'AutorizarP',
+]);
+
+Route::get('/NoAutorizarProyectoJefe/{id}', [
+	'uses' => 'proyectocontroller@index9',
+	'as' => 'NoAutorizarP',
+]);
+
 Route::get('rutaJefe', ['as' => 'menu', 'middleware' => 'auth', function () {
 	return view('templates/jefe/menu');
 }]);
@@ -51,8 +62,14 @@ Route::get('registrarprofJefe', ['as' => 'regprof', 'middleware' => 'auth', func
 	return view('templates/jefe/registrarprofesor');
 }]);
 
+Route::post('/registrarProfesor', [
+	'uses' => 'Usercontroller@store3',
+	'as' => 'registrarP'
+]);
 
 Route::get('ConfiguracionJefe', ['as' => 'config', 'uses' => 'Usercontroller@usuario1']);
+Route::get('ConfiguracionJefeNombre', ['as' => 'config2', 'uses' => 'Usercontroller@usuario1_2']);
+
 
 
 Route::get('/ConsultaProyectosJefe', [
@@ -159,6 +176,20 @@ Route::get('registrarjefAdmin', ['as' => 'regjefe', 'middleware' => 'auth', func
 	return view('templates/administrador/RegistrarJefe');
 }]);
 
+Route::get('registrarCarreraAdmin', ['as' => 'regCarrera', 'middleware' => 'auth', function () {
+	$depa = DB::table('departamentos')->get();
+	return view('templates/administrador/RegistrarCarrera', compact('depa'));
+}]);
+
+Route::get('cambioCarreraDepartamento/{id}', [
+	'uses' => 'Usercontroller@cambioCarreraDepartamento', 'as' => 'changeCarre'
+]);
+
+Route::get('cambioNombreCarrera/{id}', [
+	'uses' => 'Usercontroller@cambioNameCarrera', 'as' => 'changeNombreCarre'
+]);
+
+Route::get('/ConsultaCarrerassAdmin', ['uses' => 'Usercontroller@index', 'as' => 'busquedaC']);
 
 Route::post('/acceder', [
 
@@ -168,9 +199,15 @@ Route::post('/acceder', [
 
 Route::get('/ConsultaProfesoresAdmin', ['uses' => 'Usercontroller@index2', 'as' => 'busqueda']);
 
-
+Route::get('cambioNombreDepartamento/{id}', [
+	'uses' => 'Usercontroller@cambioNameDepartamento', 'as' => 'changeNombreDepa'
+]);
 
 Route::get('/Baja/{id}/{nombre}', ['uses' => 'Usercontroller@baja', 'as' => 'baja']);
+
+Route::get('cambioJefeDepartamento/{id}', [
+	'uses' => 'Usercontroller@cambioJefeDepartamento', 'as' => 'changeDepa'
+]);
 
 
 
@@ -274,7 +311,7 @@ Route::get('/EvaluarP', [
 ]);
 
 // se agrego las variables apellido y numcontrol
-Route::POST('/liberadoprofesor/{departamento}', [
+Route::POST('/liberadoprofesor', [
 	'uses' => 'LiberadosController@store',
 	'as' => 'liberar'
 ]);
@@ -307,12 +344,18 @@ Route::get('chatProf/{codigo}', ['as' => 'chatear', 'uses' => 'chatController@me
 
 Route::post('ResponderProf/{usuario}/{codigo}/{id_chat}', ['as' => 'chatProf', 'uses' => 'chatController@store']);
 Route::get('modificarProfesor/{id}', ['as' => 'proycambio', 'uses' => 'proyectocontroller@cambiar2']);
+Route::get('ConfiguracionProfNombre', ['as' => 'configurar2', 'uses' => 'Usercontroller@usuario3_2']);
 
 
 Route::POST('/download/{apro}', [
 	'uses' => 'LiberadosController@download',
 	'as' => 'liberado.download'
 ]);
+
+
+Route::POST('nombre/{id}', ['as' => 'actualizar2', 'uses' => 'Usercontroller@update2']);
+Route::get('/modificarEstatusProyOff/{id}/{estatus}', ['as' => 'estatusCambio2', 'uses' => 'proyectocontroller@cambiar4']);
+
 
 /*<!--========================================Invitado==================================================-->*/
 Route::get('Invitado', ['as' => 'menuInvi', function () {

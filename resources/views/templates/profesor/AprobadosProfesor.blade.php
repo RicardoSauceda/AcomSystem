@@ -45,7 +45,6 @@
 		        <th>Alumnos Aprobados</th>
 		        <th>Alumnos No Aprobados</th>
 		        <th>Gestionar PDF</th>
-			
 		      </tr>
 		    </thead>
 		     @foreach ($proyectos as $proyecto) 
@@ -55,17 +54,17 @@
 		    		<td>{{$proyecto->nombre}}</td>
 		    		<td>{{$proyecto->codigo}}</td>
 					<td>{{$proyecto->tipo}}</td>
-					<td>{{$proyecto->departamento}}</td>
+					<td>{{$proyecto->nombre_depa}}</td>
 					<td>{{$proyecto->autor}}</td>
 					<td>{{$proyecto->descrip}}</td>
 					<td>{{$proyecto->fecha}}</td>
 					<td>{{$proyecto->fin}}</td>
 
 					<td>
-						<a class="btn btn-info" href="{{ route ('aproProfesor', [$proyecto->codigo])}}" >Ver</a>
+						<a class="container" href="{{ route ('aproProfesor', [$proyecto->codigo])}}" ><div style="display: flex; justify-content: center;"><img style=" width: 40px; height: 40px;" src="plogin/images/icons/aceptado.png"></div></a>
 					</td>
 					<td>
-						<a class="btn btn-info" href="{{ route ('noaproProfesor', [$proyecto->codigo])}}" >Ver</a>
+						<a class="container" href="{{ route ('noaproProfesor', [$proyecto->codigo])}}" ><div style="display: flex; justify-content: center;"><img style=" width: 40px; height: 40px;" src="plogin/images/icons/rechazado.png"></div></a>
 					</td>
 
 					<td>
@@ -85,7 +84,7 @@
 	</div>
 	
 	
-	<div style="margin-left: 640px;" class="container-login100-form-btn p-t-10">
+	<div style="margin-left: 640px; margin-bottom: 15px;" class="container-login100-form-btn p-t-10">
 					<a href="<?php echo route('menuProfesor') ?>" class="btn btn-info">
 						Regresar al menu</a>
 						<!--button type="submit" class="login100-form-btn">Iniciar</button-->

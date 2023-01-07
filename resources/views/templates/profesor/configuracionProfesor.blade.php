@@ -24,10 +24,8 @@
 <!--===============================================================================================-->
 </head>
 <body>
-	
-	<div class="limiter">
-		@if ($errors->any())
-    <div class="alert alert-danger">
+	@if ($errors->any())
+    <div style="margin-bottom: 0px;" class="alert alert-danger">
         <ul>
             @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>
@@ -37,7 +35,7 @@
 @endif
 		@if (Session::has('flash_message'))
 
-					<div class="alert alert-success {{ Session::has('flash_message_important') ? 'alert-important' : '' }}">
+					<div style="margin-bottom: 0px;" class="alert alert-success {{ Session::has('flash_message_important') ? 'alert-important' : '' }}">
 						@if(Session::has('flash_message_important'))
 						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 						@endif
@@ -47,6 +45,8 @@
 					</div>
 
 					@endif
+	<div class="limiter">
+		
 		<div class="container-login100" style="background-image: url('plogin/images/img-01.jpg');">
 			<div class="wrap-login100 p-t-10 p-b-10">
 

@@ -23,13 +23,7 @@
 			<li><a style="color: white;" href="<?php echo route('tipos') ?>"><span class="iconic magnifying-glass"></span>Tipos de Acom</a>
 			</li>
 			<li><a style="color: white;" href="<?php echo route('Acom') ?>"><span class="iconic document"></span>Que es un Acom</a></li>
-			<li><a style="color: white;" href="https://drive.google.com/file/d/1j1f9WL4QJvbnep5C_pAzDniIQH5ylAPu/view?usp=sharing"><span class="iconic phone"></span>Descargar App Android 2020</a>
-			</li>
-			<li><a style="color: white;" href="#"><span class="iconic user"></span>Alumnos</a>
-				<ul>
-					<li><a href="<?php echo route('invitado.recuperacion') ?>">Restablecer contraseña</a></li>
-				</ul>
-			</li>
+			<li><a style="color: white;" href="https://drive.google.com/file/d/1cLGc2MPb5KjEcdADWPeb2g6oK_Pj-kFO/view?usp=sharing"><span class="iconic phone"></span>Descargar App</a></li>
 
 			<li><a style="color: white;" href="<?php echo route('salir') ?>"><span class="iconic exit-fullscreen"></span> Salir</a></li>
 		</ul>

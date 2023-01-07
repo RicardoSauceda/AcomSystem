@@ -26,31 +26,29 @@
 </head>
 
 <body>
+    @if ($errors->any())
+        <div style="margin-bottom: 0px;" class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
+
+    @if (Session::has('flash_message'))
+
+        <div style="margin-bottom: 0px;"
+            class="alert alert-success {{ Session::has('flash_message_important') ? 'alert-important' : '' }}">
+            @if (Session::has('flash_message_important'))
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            @endif
+            {{ session('flash_message') }}
+        </div>
+    @endif
     <div class="limiter">
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
 
-
-        @if (Session::has('flash_message'))
-
-            <div class="alert alert-success {{ Session::has('flash_message_important') ? 'alert-important' : '' }}">
-                @if (Session::has('flash_message_important'))
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                @endif
-                {{ session('flash_message') }}
-
-
-            </div>
-
-        @endif
         <div class="container-login100" style="background-image: url('plogin/images/img-01.jpg');">
             <div class="wrap-login100 p-t-40 p-b-5">
 
@@ -109,21 +107,11 @@
                         <select required="" name="departamento" id="inputCategoria_id" class="input100">
 
                             <option value="">Seleccione un Departamento</option>
-                            <option value="Departamento de Sistemas">Departamento de Sistemas</option>
-                            <option value="Departamento de Mecanica">Departamento de Mecanica</option>
-                            <option value="Departamento de Industrial">Departamento de Industrial</option>
-                            <option value="Departamento de Bioquimica">Departamento de Bioquimica</option>
-                            <option value="Departamento de Quimica">Departamento de Quimica</option>
-                            <option value="Departamento de Gestion Empresarial">Departamento de Gestion Empresarial
-                            </option>
-                            <option value="Departamento de Logistica">Departamento de Logistica</option>
-                            <option value="Departamento de Electrica">Departamento de Electrica</option>
-                            <option value="Departamento de Electronica">Departamento de Electronica</option>
-                            <option value="Departamento de Extraescolares">Departamento de Extraescolares</option>
-                            <option value="Departamento de Gestion Tecnologica">Departamento de Gestion Tecnologica
-                            </option>
-                            <option value="Departamento de Desarrollo Academico">Departamento de Desarrollo Academico
-                            </option>
+                            @foreach ($depa as $dep)
+                                <option value="{{ $dep->id_depat }}">{{ $dep->nombre_depa }}</option>
+                            @endforeach
+
+
 
                         </select>
                     </div>
@@ -132,219 +120,17 @@
                         size="4">Tipo de Acom
                     </font>
                     <div class="wrap-input100 validate-input m-b-10" data-validate="Tipo de Acom es requerido">
+
                         <meta name="csrf-token" content="{{ csrf_token() }}">
+
                         <select required="" name="tipo" class="input100" id="tipo">
                             <option value="">Seleccione el tipo de acom</option>
                             @foreach ($tipo as $tip)
                                 <option value="{{ $tip->id_tipo }}">{{ $tip->ntipo }}</option>
                             @endforeach
-
                         </select>
+						
                     </div>
-
-                    {{-- <font class="text-center w-full" color="Black" face="Comic Sans MS,arial,verdana"
-                        size="4">Tipo de Acom
-                    </font>
-                    <div class="wrap-input100 validate-input m-b-10" data-validate="Tipo de Acom es requerido">
-                        @if (Auth::user()->departamento == 'DepartamentodeSistemas')
-                            <select required="" name="tipo" class="input100">
-                                <option value="">Seleccione un Tipo de Acom</option>
-                                <option value="Acom-1: Tutorias">Acom 1: Tutorias</option>
-                                <option value="Acom-2: Proyectos de Investigacion">Acom 2: Proyectos de Investigación
-                                </option>
-                                <option value="Acom-3: Eventos Academicos Relacionados con la Carrera"> Acom 3: Eventos
-                                    Academicos Relacionados con la Carrera</option>
-                                <option value="Acom-4: Actividades Extraescolares">Acom 4: Actividades Extraescolares
-                                </option>
-                                <option value="Acom-5: Construccion de Prototipos y Desarrollo Tecnologico">Acom 5:
-                                    Construcción de Prototipos y Desarrollo Tecnologico</option>
-                                <option value="Acom-6: Participacion en Ediciones">Acom 6: Participacion en Ediciones
-                                </option>
-                                <option value="Acom-7: Programas en Apoyo a la Formación Profesional">Acom 7: Programas
-                                    en Apoyo a la Formación Profesional</option>
-
-                            </select>
-                        @endif
-
-                        @if (Auth::user()->departamento == 'DepartamentodeMecanica')
-                            <select required="" name="tipo" class="input100">
-                                <option value="">Seleccione un Tipo de Acom</option>
-                                <option value="Acom-1: Tutorias">Acom 1: Tutorias</option>
-                                <option value="Acom-2: Proyectos de Investigacion">Acom 2: Proyectos de Investigación
-                                </option>
-                                <option value="Acom-3: Eventos Academicos Relacionados con la Carrera"> Acom 3: Eventos
-                                    Academicos Relacionados con la Carrera</option>
-                                <option value="Acom-4: Actividades Extraescolares">Acom 4: Actividades Extraescolares
-                                </option>
-                                <option value="Acom-5: Construccion de Prototipos y Desarrollo Tecnologico">Acom 5:
-                                    Construcción de Prototipos y Desarrollo Tecnologico</option>
-                                <option value="Acom-6: Participacion en Ediciones">Acom 6: Participacion en Ediciones
-                                </option>
-                                <option value="Acom-7: Programas en Apoyo a la Formación Profesional">Acom 7: Programas
-                                    en Apoyo a la Formación Profesional</option>
-                            </select>
-                        @endif
-
-                        @if (Auth::user()->departamento == 'DepartamentodeLogistica')
-                            <select required="" name="tipo" class="input100">
-
-                                <option value="">Seleccione un Tipo de Acom</option>
-                                <option value="Acom-1: Tutorias">Acom 1: Tutorias</option>
-                                <option value="Acom-2: Proyectos de Investigacion">Acom 2: Proyectos de Investigación
-                                </option>
-                                <option value="Acom-3: Eventos Academicos Relacionados con la Carrera"> Acom 3: Eventos
-                                    Academicos Relacionados con la Carrera</option>
-                                <option value="Acom-4: Actividades Extraescolares">Acom 4: Actividades Extraescolares
-                                </option>
-                                <option value="Acom-5: Construccion de Prototipos y Desarrollo Tecnologico">Acom 5:
-                                    Construcción de Prototipos y Desarrollo Tecnologico</option>
-                                <option value="Acom-6: Participacion en Ediciones">Acom 6: Participacion en Ediciones
-                                </option>
-                                <option value="Acom-7: Programas en Apoyo a la Formación Profesional">Acom 7: Programas
-                                    en Apoyo a la Formación Profesional</option>
-                            </select>
-                        @endif
-
-                        @if (Auth::user()->departamento == 'DepartamentodeElectrica')
-                            <select required="" name="tipo" class="input100">
-                                <option value="">Seleccione un Tipo de Acom</option>
-                                <option value="Acom-1: Tutorias">Acom 1: Tutorias</option>
-                                <option value="Acom-2: Proyectos de Investigacion">Acom 2: Proyectos de Investigación
-                                </option>
-                                <option value="Acom-3: Eventos Academicos Relacionados con la Carrera"> Acom 3: Eventos
-                                    Academicos Relacionados con la Carrera</option>
-                                <option value="Acom-4: Actividades Extraescolares">Acom 4: Actividades Extraescolares
-                                </option>
-                                <option value="Acom-5: Construccion de Prototipos y Desarrollo Tecnologico">Acom 5:
-                                    Construcción de Prototipos y Desarrollo Tecnologico</option>
-                                <option value="Acom-6: Participacion en Ediciones">Acom 6: Participacion en Ediciones
-                                </option>
-                                <option value="Acom-7: Programas en Apoyo a la Formación Profesional">Acom 7: Programas
-                                    en Apoyo a la Formación Profesional</option>
-                            </select>
-                        @endif
-
-                        @if (Auth::user()->departamento == 'DepartamentodeElectronica')
-                            <select required="" name="tipo" class="input100">
-                                <option value="">Seleccione un Tipo de Acom</option>
-                                <option value="Acom-1: Tutorias">Acom 1: Tutorias</option>
-                                <option value="Acom-2: Proyectos de Investigacion">Acom 2: Proyectos de Investigación
-                                </option>
-                                <option value="Acom-3: Eventos Academicos Relacionados con la Carrera"> Acom 3: Eventos
-                                    Academicos Relacionados con la Carrera</option>
-                                <option value="Acom-4: Actividades Extraescolares">Acom 4: Actividades Extraescolares
-                                </option>
-                                <option value="Acom-5: Construccion de Prototipos y Desarrollo Tecnologico">Acom 5:
-                                    Construcción de Prototipos y Desarrollo Tecnologico</option>
-                                <option value="Acom-6: Participacion en Ediciones">Acom 6: Participacion en Ediciones
-                                </option>
-                                <option value="Acom-7: Programas en Apoyo a la Formación Profesional">Acom 7: Programas
-                                    en Apoyo a la Formación Profesional</option>
-                            </select>
-                        @endif
-
-                        @if (Auth::user()->departamento == 'DepartamentodeGestionEmpresarial')
-                            <select required="" name="tipo" class="input100">
-                                <option value="">Seleccione un Tipo de Acom</option>
-                                <option value="Acom-1: Tutorias">Acom 1: Tutorias</option>
-                                <option value="Acom-2: Proyectos de Investigacion">Acom 2: Proyectos de Investigación
-                                </option>
-                                <option value="Acom-3: Eventos Academicos Relacionados con la Carrera"> Acom 3: Eventos
-                                    Academicos Relacionados con la Carrera</option>
-                                <option value="Acom-4: Actividades Extraescolares">Acom 4: Actividades Extraescolares
-                                </option>
-                                <option value="Acom-5: Construccion de Prototipos y Desarrollo Tecnologico">Acom 5:
-                                    Construcción de Prototipos y Desarrollo Tecnologico</option>
-                                <option value="Acom-6: Participacion en Ediciones">Acom 6: Participacion en Ediciones
-                                </option>
-                                <option value="Acom-7: Programas en Apoyo a la Formación Profesional">Acom 7: Programas
-                                    en Apoyo a la Formación Profesional</option>
-                            </select>
-                        @endif
-
-                        @if (Auth::user()->departamento == 'DepartamentodeIndustrial')
-                            <select required="" name="tipo" class="input100">
-                                <option value="">Seleccione un Tipo de Acom</option>
-                                <option value="Acom-1: Tutorias">Acom 1: Tutorias</option>
-                                <option value="Acom-2: Proyectos de Investigacion">Acom 2: Proyectos de Investigación
-                                </option>
-                                <option value="Acom-3: Eventos Academicos Relacionados con la Carrera"> Acom 3: Eventos
-                                    Academicos Relacionados con la Carrera</option>
-                                <option value="Acom-4: Actividades Extraescolares">Acom 4: Actividades Extraescolares
-                                </option>
-                                <option value="Acom-5: Construccion de Prototipos y Desarrollo Tecnologico">Acom 5:
-                                    Construcción de Prototipos y Desarrollo Tecnologico</option>
-                                <option value="Acom-6: Participacion en Ediciones">Acom 6: Participacion en Ediciones
-                                </option>
-                                <option value="Acom-7: Programas en Apoyo a la Formación Profesional">Acom 7: Programas
-                                    en Apoyo a la Formación Profesional</option>
-                            </select>
-                        @endif
-
-                        @if (Auth::user()->departamento == 'DepartamentodeBioquimica')
-                            <select required="" name="tipo" class="input100">
-                                <option value="">Seleccione un Tipo de Acom</option>
-                                <option value="Acom-1: Tutorias">Acom 1: Tutorias</option>
-                                <option value="Acom-2: Proyectos de Investigacion">Acom 2: Proyectos de Investigación
-                                </option>
-                                <option value="Acom-3: Eventos Academicos Relacionados con la Carrera"> Acom 3: Eventos
-                                    Academicos Relacionados con la Carrera</option>
-                                <option value="Acom-4: Actividades Extraescolares">Acom 4: Actividades Extraescolares
-                                </option>
-                                <option value="Acom-5: Construccion de Prototipos y Desarrollo Tecnologico">Acom 5:
-                                    Construcción de Prototipos y Desarrollo Tecnologico</option>
-                                <option value="Acom-6: Participacion en Ediciones">Acom 6: Participacion en Ediciones
-                                </option>
-                                <option value="Acom-7: Programas en Apoyo a la Formación Profesional">Acom 7: Programas
-                                    en Apoyo a la Formación Profesional</option>
-                            </select>
-                        @endif
-
-                        @if (Auth::user()->departamento == 'DepartamentodeQuimica')
-                            <select required="" name="tipo" class="input100">
-                                <option value="">Seleccione un Tipo de Acom</option>
-                                <option value="Acom-1: Tutorias">Acom 1: Tutorias</option>
-                                <option value="Acom-2: Proyectos de Investigacion">Acom 2: Proyectos de Investigación
-                                </option>
-                                <option value="Acom-3: Eventos Academicos Relacionados con la Carrera"> Acom 3: Eventos
-                                    Academicos Relacionados con la Carrera</option>
-                                <option value="Acom-4: Actividades Extraescolares">Acom 4: Actividades Extraescolares
-                                </option>
-                                <option value="Acom-5: Construccion de Prototipos y Desarrollo Tecnologico">Acom 5:
-                                    Construcción de Prototipos y Desarrollo Tecnologico</option>
-                                <option value="Acom-6: Participacion en Ediciones">Acom 6: Participacion en Ediciones
-                                </option>
-                                <option value="Acom-7: Programas en Apoyo a la Formación Profesional">Acom 7: Programas
-                                    en Apoyo a la Formación Profesional</option>
-                            </select>
-                        @endif
-
-                        @if (Auth::user()->departamento == 'DepartamentodeExtraescolares')
-                            <select required="" name="tipo" class="input100">
-                                <option value="">Seleccione un Tipo de Acom</option>
-                                <option value="Acom-4: Actividades Extraescolares">Acom 4: Actividades Extraescolares
-                                </option>
-                            </select>
-                        @endif
-
-                        @if (Auth::user()->departamento == 'DepartamentodeGestionTecnologica')
-                            <select required="" name="tipo" class="input100">
-                                <option value="">Seleccione un Tipo de Acom</option>
-                                <option value="Acom-5: Construccion de Prototipos y Desarrollo Tecnologico">Acom 5:
-                                    Construcción de Prototipos y Desarrollo Tecnologico</option>
-                            </select>
-                        @endif
-
-                        @if (Auth::user()->departamento == 'DepartamentodeDesarrolloAcademico')
-                            <select required="" name="tipo" class="input100">
-                                <option value="">Seleccione un Tipo de Acom</option>
-                                <option value="Acom-7: Programas en Apoyo a la Formación Profesional">Acom 7: Programas
-                                    en Apoyo a la Formación Profesional</option>
-                            </select>
-                        @endif
-
-
-                    </div> --}}
 
                     <font class="text-center w-full" color="Black" face="Comic Sans MS,arial,verdana"
                         size="4">Subtipo de Acom
@@ -353,36 +139,59 @@
 
                         <select required="" name="sub" class="input100" id="subtipo">
                             <option value="">Seleccione el subtipo de acom</option>
+
+
                         </select>
                     </div>
 
 
-
-                    <font class="text-center w-full" color="Black" face="Comic Sans MS,arial,verdana"
-                        size="4">Creditos
-                    </font>
-                    <div class="wrap-input100 validate-input m-b-10"
-                        data-validate="Credito de la Actividad es requerido">
-                        <select required="" name="credito" class="input100">
-                            <option value="">Seleccione la Cantidad de Creditos</option>
-                            <option value="1">1</option>
-                            <option value="0.5">0.5</option>
-
-                        </select>
-                    </div>
 
 
                     <font class="text-center w-full" color="Black" face="Comic Sans MS,arial,verdana"
                         size="4">Codigo de la actividad
                     </font>
                     <div class="wrap-input100 validate-input m-b-10" data-validate="Codigo de la Actividad Requerida">
-                        <input required="" class="input100" type="integer" name="codigo"
-                            placeholder="Maximo 12 caracteres" id="codigo">
+                        <input required="" class="input100" type="integer" maxlength="20" name="codigo"
+                            placeholder="Codigo de la Actividad" id="codigo">
                         <span class="focus-input100"></span>
                         <span class="symbol-input100">
                             <i class=""></i>
                         </span>
                     </div>
+
+
+
+
+                    <font class="text-center w-full" color="Black" face="Comic Sans MS,arial,verdana"
+                        size="4">Periodo escolar
+                    </font>
+                    <div class="wrap-input100 validate-input m-b-10" data-validate="Periodo escolar es requerido">
+                        <meta name="csrf-token" content="{{ csrf_token() }}">
+                        <select required="" name="periodo" class="input100" id="periodo">
+                            <option value="">Seleccione el tperiodo escolar</option>
+                            <option value="1">Enero-Junio</option>
+                            <option value="2">Agosto-Diciembre</option>
+                        </select>
+                    </div>
+
+                    <font class="text-center w-full" color="Black" face="Comic Sans MS,arial,verdana"
+                        size="4">Año del periodo
+                    </font>
+                    <div class="wrap-input100 validate-input m-b-10" data-validate="Año del periodo es requerido">
+                        <meta name="csrf-token" content="{{ csrf_token() }}">
+                        <select required="" name="year" class="input100" id="year">
+                            <option value="">Seleccione un año</option>
+                            @foreach ($array as $a)
+                                <option value="{{ $inicio }}">{{ $inicio }}</option>
+                                <?php
+                                $inicio++;
+                                ?>
+                            @endforeach
+
+                        </select>
+                    </div>
+
+
 
 
                     <font class="text-center w-full" color="Black" face="Comic Sans MS,arial,verdana"
@@ -444,6 +253,7 @@
     <script src="plogin/js/main.js"></script>
     <script src="//code.jquery.com/jquery.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
 
     <script>
         $('div.alert').not('.alert-important').delay(3000).slideUp(300);

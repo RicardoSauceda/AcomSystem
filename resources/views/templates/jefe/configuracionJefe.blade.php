@@ -27,7 +27,7 @@
 	
 	<div class="limiter">
 		@if ($errors->any())
-    <div class="alert alert-danger">
+    <div style="margin-bottom: 0px;" class="alert alert-danger">
         <ul>
             @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>
@@ -37,7 +37,7 @@
 @endif
 		@if (Session::has('flash_message'))
 
-					<div class="alert alert-success {{ Session::has('flash_message_important') ? 'alert-important' : '' }}">
+					<div style="margin-bottom: 0px;" class="alert alert-success {{ Session::has('flash_message_important') ? 'alert-important' : '' }}">
 						@if(Session::has('flash_message_important'))
 						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 						@endif
@@ -62,6 +62,8 @@
 					<span class="login100-form-title p-t-5 p-b-5">
 					{{Auth::user()->nombre}}
 					</span>
+
+					
 
 					<div class="wrap-input100 validate-input m-b-10" >
 						<label style="color: Black" for="usuario">Introduce tu Nuevo Usuario:</label>

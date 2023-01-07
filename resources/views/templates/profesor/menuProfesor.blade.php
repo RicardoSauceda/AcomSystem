@@ -17,7 +17,7 @@
 		
 	<nav style="background: #2F6895;">
 		<ul class="menu">
-			<!--li><a href="#"><span class="iconic home"></span> Inicio</a></li-->
+			
 
 			<li><a style="color: white;" href="#"><span class="iconic plus-alt"></span> Registrar</a>
 				<ul>
@@ -26,23 +26,25 @@
 			</li>
 			<li><a style="color: white;" href="#"><span class="iconic magnifying-glass"></span>Gestionar</a>
 				<ul>
-					<li><a href="<?php echo route('proyecto') ?>">Actividades</a></li>
-					
-			
+					<li><a href="<?php echo route('proyecto') ?>">Actividades Autorizadas</a></li>
+					<li><a href="<?php echo route('rechazadas') ?>">Actividades Pendientes/Rechazadas</a></li>
 				</ul>
 			</li>
-			<!--<li><a style="color: white;" href="<?php echo route('liberarP') ?>"><span class="iconic document"></span> Liberar Alumnos</a></li>-->
 
-
-			<li><a style="color: white;" href="<?php echo route('aprobadosProf') ?>"><span class="iconic user"></span> Listar Liberados</a>
+			<li><a style="color: white;" href="<?php echo route('aprobadosProf') ?>"><span class="iconic user"></span> Listar Liberados</a></li>
+			
+			<li><a style="color: white;" href="#"><span class="iconic info"></span> Configuración</a>
 				<ul>
 					
-				
+					<li><a style="color: black;" href="<?php echo route('configurar2') ?>">Editar Nombre</a></li>
+					<li><a style="color: black;" href="<?php echo route('configurar') ?>">Editar Usuario y Contraseña</a></li>
 				</ul>
 			</li>
-			<li><a style="color: white;" href="<?php echo route('configurar') ?>"><span class="iconic info"></span> Configuración</a></li>
+			
 			<li><a style="color: white;" href="<?php echo route('mensg') ?>"><span class="iconic chat"></span>Mensajes</a></li>
 			<li><a style="color: white;" href="<?php echo route('salir') ?>"><span class="iconic exit-fullscreen"></span>Cerrar Sesion</a></li>
+
+		
 		</ul>
 		<div class="clearfix"></div>
 	</nav>
@@ -50,7 +52,7 @@
 
 	<style type="text/css">
 	.wrap {
-		width: 900px;
+		width: 720px;
 		margin: 4em auto;
     }
 	</style>

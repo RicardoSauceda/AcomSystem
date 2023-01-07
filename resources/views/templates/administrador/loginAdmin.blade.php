@@ -27,7 +27,7 @@
 	
 	<div class="limiter">
 		@if ($errors->any())
-    <div class="alert alert-danger">
+    <div style="margin-bottom: 0px;" class="alert alert-danger">
         <ul>
             @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>
@@ -69,27 +69,8 @@
 						</span>
 
 						
-						
 					</div>
 
-				
-					<div class="form-group">
-						<div class="wrap-input100 validate-input m-b-10">
-							<div class="checkbox">
-								<label>
-									<input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Recuerdame
-								</label>
-							</div>
-						</div>
-					</div>
-
-				<div class="form-group">
-					<div class="wrap-input100 validate-input m-b-10 ">
-						<a class="btn btn-link" href="{{ route('password.request') }}" style="color: #111111;">
-							Olvidastes tu contraseña?
-						</a>
-					</div>
-				</div>
 
 					<font class="text-center w-full p-t-1 p-b-10" color="White" face="Comic Sans MS,arial,verdana" size="5">¡Bienvenido Inicie Sesión!
  					 </font>
@@ -97,19 +78,14 @@
 					<!--a href="<?php echo route('menuAdmin') ?>" class="login100-form-btn">Iniciar
 						<button></button></a-->
 						<button type="submit" class="login100-form-btn">Iniciar</button>
-
-						
-
 					</div>
 
 					
 					<div class="container-login100-form-btn p-t-5">
 					<a href="<?php echo route('principal') ?>" class="login100-form-btn">Salir
 						<button></button></a>
-
-						
 						<!--button type="submit" class="login100-form-btn">Iniciar</button-->
-					
+					</div>
 				</form>
 			</div>
 		</div>

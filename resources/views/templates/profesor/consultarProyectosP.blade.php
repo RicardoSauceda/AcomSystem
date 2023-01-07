@@ -24,66 +24,133 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!--===============================================================================================-->
+<link href="pmenu/stylemenu.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="pmenu/iconic.css" media="screen" rel="stylesheet" type="text/css" />
+<style type="text/css">
+	
+.table-fixed th{ 
+	
+	background-color: #f1f1f6;
+	
+	 }
+.table-fixed td{
+	background-color: white;
+	
+}
+.table-fixed tr:hover{
+	background-color: #f1f1f6;
+	
+}
+.table-fixed tr:hover td{
+	background-color: transparent;
+	
+}
+</style>
 
-<link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
+<nav  style="background: #2F6895; position: fixed; width: 100%;" >
+		<ul class="menu" style=" height: 40px; display: flex; justify-content: center;">
+			
+			
+						
+			<li style="position: absolute;left: 20px;"><a style="color: white;" href="<?php echo route('menuProfesor') ?>"><span class="iconic arrow-left"></span> Regresar</a></li>			
+			<br><br>
 
-	<div class="container">
+			<li  style="color: white; position: absolute; top: 15px;"><span class="iconic user"></span>{{ Auth::user()->nombre }}		
+			</li>
+			
+			<li style="position: absolute; right: 20px;"><a style="color: white;" href="<?php echo route('salir') ?>"><span class="iconic exit-fullscreen"></span>Cerrar Sesion</a></li>
+
+		</ul>
+		<div class="clearfix"></div>
+	</nav>
+	
+	
+	
+
+
+	<div style="padding: 15px;" >
 		
-  		<h2>Actividades de {{ Auth::user()->nombre }}</h2>
-  		<table class="table table-striped table-bordered table-hover table-condensed" >
-    		<thead >
+		
+  		
+  		<br><br><br>
+  		<table  class="table table-striped table-bordered table-hover table-condensed table-fixed" >
+    		<!-- <thead  style="position: absolute; top: 70px; left: 113px; width: 1141px;"> -->
+		      <thead>
 		      <tr>
-		        
+		        <th>Mostrar a alumnos</th>
 		        <th>Nombre de la Actividad</th>
 		        <th>Tipo de Acom</th>
-		        <th >Codigo </th>
+		        <th >Código </th>
 		        <th >Departamento</th>
 		        
-		        <th >Descripcion de la Actividad</th>
-		        <th >Fecha de inicio</th>
-		        <th >Fecha de Finalizacion</th>
+		        <th >Descripción de la Actividad</th>
+		        <th >Periodo Escolar</th>
+		        <th >Fechas de la Actividad</th>
 		        <th >Solicitudes Recibidas</th>
 		        <th >Alumnos Aceptados</th>
-		        <th >Gestionar PDF Inscritos</th>
-		        <th >Modificar</th>
+		        <th >PDF Aceptados</th>
+		        <th >Modificar Actividad</th>
 		        <th >Liberar alumnos</th>
+		        <th >Alumnos aprobados</th>
+		        <th >Alumnos no aprobados</th>
 		        
 		      </tr>
 		    </thead>
 
-		     @foreach ($proyectosP as $proyecto) 
-		    <tbody>
+		     
+		    <tbody >
+		    	@foreach ($proyectosP as $proyecto) 
 		    	<tr >
-		    		
+		    		<td>
+		    			@if($proyecto->statusFecha == 0)
+							<a class="container" href="{{ route('estatusCambio1',[$proyecto->id,$proyecto->statusFecha])}}" >
+							<div style="display: flex; justify-content: center;"><img style=" width: 40px; height: 40px;" src="plogin/images/icons/cambiar_on.png"></div></a>
+						@endif
+						@if($proyecto->statusFecha == 1)
+							<a class="container" href="{{ route('estatusCambio2',[$proyecto->id,$proyecto->statusFecha])}}" >
+							<div style="display: flex; justify-content: center;"><img style=" width: 40px; height: 40px;" src="plogin/images/icons/cambiar_off.png"></div></a>
+						@endif
+					</td>
 		    		<td>{{$proyecto->nombre}}</td>
 					<td>{{$proyecto->tipo}}</td>
 					<td>{{$proyecto->codigo}}</td>
-					<td>{{$proyecto->departamento}}</td>
+					<td>{{$proyecto->nombre_depa}}</td>
 					<!--<td>{{$proyecto->autor}}</td>-->
 					<td>{{$proyecto->descrip}}</td>
-					<td>{{$proyecto->fecha}}</td>
-					<td>{{$proyecto->fin}}</td>
+					@if($proyecto->periodo == 1)
+					<td style="width: 30px;">Enero-Junio de {{$proyecto->año}}</td>
+					@else
+					<td style="width: 30px;">Agosto-Diciembre de {{$proyecto->año}}</td>
+					@endif
+					<td>Inicio: {{$proyecto->fecha}}<br> Fin: {{$proyecto->fin}}</td>
 
 					
 				
 					<td>
-						<a class="btn btn-success" href="{{ route ('solProfesor', [$proyecto->codigo])}}" >Ver</a>
+						<a class="container" href="{{ route ('solProfesor', [$proyecto->id])}}" >
+							<div style="display: flex; justify-content: center;"><img style=" width: 40px; height: 40px;" src="plogin/images/icons/añadir.png"></div></a>
 					</td>
 					<td>
-						<a class="btn btn-success" href="{{ route ('inscripciones', [$proyecto->codigo])}}" >Ver</a>
+						<a class="container" href="{{ route ('inscripciones', [$proyecto->id])}}" ><div style="display: flex; justify-content: center;"><img style=" width: 40px; height: 40px;" src="plogin/images/icons/aceptado.png"></div></a>
 					</td>
 
 					<td>
-						<a  class="btn btn-success" href="{{ route ('reportePDF', [$proyecto->codigo])}}" >PDF Inscritos </a>
+						<a  class="container" href="{{ route ('reportePDF', [$proyecto->id])}}" ><div style="display: flex; justify-content: center;"><img style=" width: 40px; height: 40px;" src="plogin/images/icons/pdf.png"></div> </a>
 					</td>
 					
 					<td>
-						<a class="btn btn-success" href="{{route('proycambio',[$proyecto->id])}}">Modificar</a>
+						<a class="container" href="{{route('proycambio',[$proyecto->id])}}"><div style="display: flex; justify-content: center;"><img style=" width: 45px; height: 45px;" src="plogin/images/icons/editar.png"></div></a>
 					</td>
 					<td>
-						<a class="btn btn-success" href="{{ route ('acoms', [$proyecto->codigo])}}">Liberar</a>
+						<a class="container" href="{{ route ('acoms', [$proyecto->id])}}"><div style="display: flex; justify-content: center;"><img style=" width: 45px; height: 45px;" src="plogin/images/icons/liberar.png"></div></a>
+					</td>
+					<td>
+						<a class="container" href="{{ route ('aproProfesor', [$proyecto->codigo])}}" ><div style="display: flex; justify-content: center;"><img style=" width: 45px; height: 45px;" src="plogin/images/icons/apro.png"></div></a>
+					</td>
+					<td>
+						<a class="container" href="{{ route ('noaproProfesor', [$proyecto->codigo])}}" ><div style="display: flex; justify-content: center;"><img style=" width: 45px; height: 45px;" src="plogin/images/icons/no apro.png"></div></a>
 					</td>
 		    	</tr>
 		    	
@@ -94,10 +161,10 @@
 	</div>
 	
 	
-	<div style="margin-left: 640px;" class="container-login100-form-btn p-t-10">
+	<!-- <div style="margin-left: 640px; margin-bottom: 15px;" class="container-login100-form-btn p-t-10">
 					<a href="<?php echo route('menuProfesor') ?>" class="btn btn-info"> Regresar al Menu</a>
 						
-					</div>
+					</div> -->
 
 
 	

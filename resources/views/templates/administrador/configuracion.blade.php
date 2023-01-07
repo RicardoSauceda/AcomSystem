@@ -57,11 +57,9 @@
 					</div>
 
 					<span class="login100-form-title p-t-20 p-b-15">
-					Cambio de Usuario y Contraseña	de 
+					Cambio de Usuario y Contraseña 
 					</span>
-					<span class="login100-form-title p-t-5 p-b-5">
-					{{Auth::user()->usuario}}
-					</span>
+					
 
 					<div class="wrap-input100 validate-input m-b-10" >
 						<label style="color: Black" for="usuario">Introduce tu Nuevo Usuario:</label>

@@ -24,7 +24,67 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!--===============================================================================================-->
+	<style type="text/css">
+	.table-fixed tbody{
 	
+	overflow-x: auto;
+	width: 100%;
+
+	
+}
+
+.table-fixed thead,
+.table-fixed tbody,
+.table-fixed td,
+.table-fixed th{
+	display: block;
+}
+
+.table-fixed tbody td,
+.table-fixed thead > tr >th{
+	float: left;
+	border-bottom-width: 0;
+}
+.table-fixed th{ 
+	
+	display: flex; 
+	justify-content: center;
+	background-color: #f1f1f6;
+	
+	 }
+.table-fixed td{
+	background-color: white;
+	
+}
+.table-fixed tr:hover{
+	background-color: #f1f1f6;
+	
+}
+.table-fixed tr:hover td{
+	background-color: transparent;
+	
+}
+.table-fixed{
+	
+}
+.apellidos1{width: 200px; height: 55px;}
+.nombre1{width: 200px; height: 55px;}
+.usuario1{width: 150px; height: 55px;}
+.carrera1{width: 270px; height: 55px;}
+.control1{width: 85px; height: 55px;}
+.acom1{width: 250px; height: 55px;}
+.selec1{width: 193px; height: 55px;}
+
+.apellidos{	width: 200px; height: 55px; overflow-y: auto;}
+.nombre{width: 200px; height: 55px; overflow-y: auto;}
+.usuario{width: 150px;height: 55px; overflow-y: auto;}
+.carrera{width: 270px;height: 55px; overflow-y: auto;}
+.control{width: 85px;height: 55px; overflow-y: auto;}
+.acom{width: 250px;height: 55px;  overflow-y: auto;}
+.selec{width: 193px;height: 55px;}
+.selec2{width: 176px;height: 55px;}
+</style>
+
 	<script type="text/javascript">
         function checkAll(){
             var parent = document.getElementById('parent');
@@ -52,11 +112,32 @@
         }
     </script>
 
+<link href="/pmenu/style2.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="/pmenu/iconic2.css" media="screen" rel="stylesheet" type="text/css" />
+
+
 </head>
 <body>
+	<nav  style="background: #2F6895; position: fixed; width: 100%;" >
+		<ul class="menu" style=" height: 40px; display: flex; justify-content: center;">
+			
+			
+						
+			<li style="position: absolute; left: 20px;"><a style="color: white;" href="<?php echo route('proyecto') ?>"><span class="iconic arrow-left"></span> Regresar</a></li>			
+			<br><br>
 
-	<div class="container">
-		@if (Session::has('flash_message'))
+			<li  style="color: white; position: absolute; top: 15px;"><span class="iconic user"></span>{{ Auth::user()->nombre }}		
+			</li>
+			
+			<li style="position: absolute; right: 20px;"><a style="color: white;" href="<?php echo route('salir') ?>"><span class="iconic exit-fullscreen"></span>Cerrar Sesion</a></li>
+
+		</ul>
+		<div class="clearfix"></div>
+	</nav>
+
+	<div style="height: 45px"></div>
+
+	@if (Session::has('flash_message'))
 
 					<div class="alert alert-success {{ Session::has('flash_message_important') ? 'alert-important' : '' }}">
 						@if(Session::has('flash_message_important'))
@@ -68,9 +149,9 @@
 					</div>
 
 					@endif
-		
-	
 
+	<div class="container">
+				
   		<h2>Solicitudes para la Actividad:   {{$dato->nombre}}</h2>
 
 
@@ -87,48 +168,87 @@
 							</select>
 							<br>
 							@if ($token == true)
-							<button style="margin: 5px;" class="btn btn-success">ENVIAR SELECCIONADOS</button>
+							<button style="margin: 5px;" class="btn btn-success">NOTIFICAR</button>
 							@endif
 							@if ($token == false)
 							<button style="margin: 5px;" disabled="false" class="btn btn-success">ENVIAR SELECCIONADOS</button>
 							@endif
 						</div>
 				</div>
+
+		<div style="width: 1100px;">
   		                    
-  		<table class="table table-striped table-bordered table-hover table-condensed">
+  		<table class="table table-striped table-bordered table-hover table-condensed table-fixed">
     		<thead>
 		      <tr>
 		        
-		        <th>Apellidos</th>
-		        <th>Nombre(s)</th>
-		        <th>Usuario</th>
-		        <th>Carrera</th>
-		        <th>No. de Control</th>
-		        <th><span id="label">Seleccionar Todos</span>
+		        <th class="apellidos1">Apellidos</th>
+		        <th class="nombre1">Nombre(s)</th>
+		        <th class="usuario1">Usuario</th>
+		        <th class="carrera1">Carrera</th>
+		        <th class="control1">No. de Control</th>
+		        <th class="selec1"><span id="label">Seleccionar Todos</span>
         <input type="checkbox" onclick="checkAll()" id="parent" ><br></th>
 		        <!--<th style="font-size: 16px;">Respuesta</th>
 		        <th>Enviar Respuesta</th>-->
 		      </tr>
 		    </thead>
 
-		    @foreach ($solicitudprofe as $solicitudes) 
+		    
 
 
+				@if($numero>7)
+		    <tbody style="cursor: pointer; height: 386px;">
+		    	@endif
+    			@if($numero==7)
+		    <tbody style="cursor: pointer; height: 386px;">
+		    	@endif
+		    	@if($numero==6)
+		    <tbody style="cursor: pointer; height: 331px;">
+		    	@endif
+		    	@if($numero==5)
+		    <tbody style="cursor: pointer; height: 276px;">
+		    	@endif
+		    	@if($numero==4)
+		    <tbody style="cursor: pointer; height: 221px;">
+		    	@endif
+		    	@if($numero==3)
+		    <tbody style="cursor: pointer; height: 166px;">
+		    	@endif
+		    	@if($numero==2)
+		    <tbody style="cursor: pointer; height: 111px;">
+		    	@endif
+		    	@if($numero==1)
+		    <tbody style="cursor: pointer; height: 56px;">
+		    	@endif
+		    	@if($numero==0)
+		    <tbody style="cursor: pointer; height: 1px;">
+		    	@endif
 
-		    <tbody>
+		    	@foreach ($solicitudprofe as $solicitudes) 
 		    	<tr>
 		    		
-		    		<td>{{$solicitudes->apellidos}}</td>
-		    		<td>{{$solicitudes->alumno}}</td>
-		    		<td>{{$solicitudes->usuario}}</td>
-					<td>{{$solicitudes->carrera}}</td>
-					<td>{{$solicitudes->numControl}}</td>
+		    		<td class="apellidos">{{$solicitudes->apellidos}}</td>
+		    		<td class="nombre">{{$solicitudes->nombre}}</td>
+		    		<td class="usuario">{{$solicitudes->usuario}}</td>
+					<td class="carrera">{{$solicitudes->Carrera}}</td>
+					<td class="control">{{$solicitudes->numControl}}</td>
 					
 					
-					<td>
+					
+
+					@if($numero>7)
+					<td class="selec2">
 						<input style="width: 15px; height: 15px; margin-left:45%;" type="checkbox" class="chkb" id="check" name="chk[]" value="{{$solicitudes->id_sol}}">
 						<!--<button class="btn btn-success">ENVIAR</button>-->
 					</td>
+					@endif
+					@if($numero<=7)
+					<td class="selec">
+						<input style="width: 15px; height: 15px; margin-left:45%;" type="checkbox" class="chkb" id="check" name="chk[]" value="{{$solicitudes->id_sol}}">
+						<!--<button class="btn btn-success">ENVIAR</button>-->
+					</td>
+					@endif
 
 					<!--<td>
 					
@@ -147,19 +267,21 @@
 					</form>-->
 					
 		    	</tr>
+		    	@endforeach
 		    </tbody>
 
-		    @endforeach
+		    
 		  </table>
+		  </div>
 
 		</form>
 		  
 	</div>
 
-	<div class="text-center w-full" style="margin-top: 50px">
-		<!--a  class="btn btn-info" href="{{ URL::previous() }}">Regresar a los Proyectos</a-->
-		<a href="<?php echo route('proyecto') ?>" class="btn btn-info"> Regresar a los Proyectos</a>
-	</div>
+	<!-- <div class="text-center w-full" style="margin-top: 50px">
+		a  class="btn btn-info" href="{{ URL::previous() }}">Regresar a los Proyectos</a
+		<a href="<?php //echo route('proyecto') ?>" class="btn btn-info"> Regresar a los Proyectos</a>
+	</div> -->
 <!--===============================================================================================-->	
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->

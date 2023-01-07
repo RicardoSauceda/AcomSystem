@@ -3,16 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests;
+
 use App\User;
 use App\Liberados;
-use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\Charts;
+use Charts;
 use App\proyectos;
 use Laracasts\Flash\Flash;
 use Auth;
 use Session;
 use Validator;
+use DB;
 use App\solicitudes;
 use count;
 use sum;
@@ -30,10 +30,9 @@ class EstadisticasController extends Controller
 
 	public function index(Request $request, $codigo, $tipo, $nombre)
 	{
-		
 		$chart = Charts::database(Liberados::all()->where('codigo_pro', '=', $codigo), 'bar', 'highcharts')
 
-			->title('Estadisticas Aprobados y No Aprobados del      ' . $tipo . '   del proyecto              ' . $nombre)
+			->title('Estadisticas Aprobados y No Aprobados del' . $tipo . '   del proyecto' . $nombre)
 			->elementLabel('Total')
 			->dimensions(1000, 500)
 			->responsive(false)

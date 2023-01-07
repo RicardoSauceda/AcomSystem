@@ -49,10 +49,12 @@
             <thead>
               <tr>
                
-                <th>Alumno</th>
-                <th>Tipo de Acom</th>
-                <th>Credito Obtenido</th>
-                <th>Calificacion</th>
+                        <th>Numero de control</th>
+                        <th>Nombre</th>
+                        <th>Apellidos</th>
+                        <th>Tipo de Acom</th>
+                        <th>Credito Obtenido</th>
+                        <th>Calificacion Obtenida</th>
                 
               
 
@@ -67,10 +69,12 @@
             <tbody>
                 <tr>
                     
-                    <td>{{$listado->nombre}}</td>
-                    <td>{{$listado->tipo}}</td>
-                    <td>{{$listado->credito}}</td>
-                    <td>{{$listado->calificacion}}</td>
+                            <td>{{$listado->numControl}}</td>
+                            <td>{{$listado->nombre}}</td>
+                            <td>{{$listado->apellidos}}</td>   
+                            <td>{{$listado->tipo}}</td>
+                            <td>{{$listado->credito}}</td>
+                            <td>{{$listado->calificacion}}</td>
                    
               
 

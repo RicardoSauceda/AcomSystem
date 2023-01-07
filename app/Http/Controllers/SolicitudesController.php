@@ -43,18 +43,17 @@ class SolicitudesController extends Controller
         
         $user = auth()->user();
  
-        $solicitudprofe = solicitudes::where([['id_creo', '=', $user->id],['codigo_pro','=',$codigo],['aprobados','=',0],])->orderBy('apellidos','asc')->get();
-        $dato = DB::table('proyectos')->where([['id_creo', '=', $user->id],['codigo','=',$codigo],])->first();
-
-        //return view('templates.profesor.consultarSolicitudesP', compact('solicitudprofe','dato'));
-
+         $solicitudprofe = DB::table('solicitudes')->select('solicitudes.id_sol','solicitudes.id_usuario','usuario.nombre','usuario.apellidos','usuario.numControl','usuario.usuario','usuario.id_carrera','carreras.Carrera')->join('usuario','usuario.id','=','solicitudes.id_usuario')->join('carreras','carreras.idCar','=','usuario.id_carrera')->where([['id_creo', '=', $user->id],['idProy',$codigo],['aprobados','=',0],])->orderBy('usuario.apellidos','asc')->get();
+        $dato = DB::table('proyectos')->where([['id_creo', '=', $user->id],['id','=',$codigo],])->first();
+            
+            $numero = count($solicitudprofe);
           if (count($solicitudprofe)>0) {
             $token=true;
-            return view('templates.profesor.consultarSolicitudesP', compact('solicitudprofe','dato','token'));
+            return view('templates.profesor.consultarSolicitudesP', compact('solicitudprofe','dato','token','numero'));
             
         }else{
             $token=false;
-            return view('templates.profesor.consultarSolicitudesP', compact('solicitudprofe','dato','token'));
+            return view('templates.profesor.consultarSolicitudesP', compact('solicitudprofe','dato','token','numero'));
             
         }
     }
@@ -92,9 +91,9 @@ class SolicitudesController extends Controller
     {
          $user = auth()->user();
 
-         $solicitud = solicitudes::where([['id_creo', '=', $user->id],['codigo_pro','=',$codigo],['aprobados', '=', 1],])->orderBy('apellidos','asc')->paginate(100);
+         $solicitud = DB::table('solicitudes')->select('solicitudes.id_sol','solicitudes.id_usuario','usuario.nombre','usuario.apellidos','usuario.numControl','usuario.usuario','usuario.id_carrera','carreras.Carrera')->join('usuario','usuario.id','=','solicitudes.id_usuario')->join('carreras','carreras.idCar','=','usuario.id_carrera')->where([['id_creo', '=', $user->id],['idProy','=',$codigo],['aprobados', '=', 1],])->orderBy('apellidos','asc')->paginate(100);
 
-        $dato = DB::table('proyectos')->where([['id_creo', '=', $user->id],['codigo','=',$codigo],])->first();
+        $dato = DB::table('proyectos')->where([['id_creo', '=', $user->id],['id','=',$codigo],])->first();
 
         return view('templates.profesor.listarAlumnosInscritosP', compact('solicitud','dato'));
 
@@ -111,18 +110,27 @@ class SolicitudesController extends Controller
 
     public function liberar2(Request $request, $codigo)
     {
-        $user = auth()->user();
-        $aprobados = solicitudes::where([['aprobados', '=', 1],['calificacion', '=', 0],['id_creo','=',$user->id],['codigo_pro', '=', $codigo]])->orderBy('apellidos','asc')->paginate(20);
-          $dato = DB::table('proyectos')->where([['id_creo', '=', $user->id],['codigo','=',$codigo],])->first();
+        
+        if(auth()->user()){
+            $user = auth()->user();
+        $aprobados = DB::table('solicitudes')->select('solicitudes.id_sol','solicitudes.id_usuario','usuario.nombre','usuario.apellidos','usuario.numControl','usuario.usuario','usuario.id_carrera','carreras.Carrera')->join('usuario','usuario.id','=','solicitudes.id_usuario')->join('carreras','carreras.idCar','=','usuario.id_carrera')->where([['aprobados', '=', 1],['calificacion', '=', 0],['id_creo','=',$user->id],['idProy', '=', $codigo]])->orderBy('apellidos','asc')->paginate(20000);
+          $dato = DB::table('proyectos')->where([['id_creo', '=', $user->id],['id','=',$codigo],])->first();
+          $tipo = DB::table('subtipo_acom')->join('tipo_acom','subtipo_acom.id_Acom','=','tipo_acom.id_tipo')->where('id_sub',$dato->id_SubTipoAcom)->first();
+          $numero = count($aprobados);
+          // dd($numero);
         if (count($aprobados)>0) {
             $token=true;
-            return view('templates.profesor.liberarAlumnosP',compact('aprobados','dato','token'));
+            return view('templates.profesor.liberarAlumnosP',compact('numero','aprobados','tipo','dato','token'));
             # code...
         }else{
             $token=false;
-            return view('templates.profesor.liberarAlumnosP',compact('aprobados','dato','token'));
+            return view('templates.profesor.liberarAlumnosP',compact('aprobados','tipo','dato','token','numero'));
         }
+    }else{
+        return view('templates.principal');
+    }
        // return view('templates.profesor.liberarAlumnosP',compact('aprobados','dato'));
+    
 
     }
 //te direcciona a la ruta de evaluar alumno
@@ -156,13 +164,13 @@ class SolicitudesController extends Controller
        
         $user = auth()->user();
 
-         $lista = solicitudes::where([['id_creo', '=', $user->id],['codigo_pro','=',$codigo],['aprobados', '=', 1],])->orderBy('apellidos','asc')->paginate(100);
+         $lista = DB::table('solicitudes')->select('solicitudes.id_sol','solicitudes.id_usuario','usuario.nombre','usuario.apellidos','usuario.numControl','usuario.usuario','usuario.id_carrera','carreras.Carrera')->join('usuario','usuario.id','=','solicitudes.id_usuario')->join('carreras','carreras.idCar','=','usuario.id_carrera')->where([['id_creo', '=', $user->id],['idProy','=',$codigo],['aprobados', '=', 1],])->orderBy('apellidos','asc')->paginate(100);
 
-        $dato = DB::table('proyectos')->where([['id_creo', '=', $user->id],['codigo','=',$codigo],])->first();
+        $dato = DB::table('proyectos')->where([['id_creo', '=', $user->id],['id','=',$codigo],])->first();
 
         $pdf = PDF::loadView('templates.profesor.ListaPDFprofesor', compact('lista','dato'));
 
-        return $pdf->download('listadoPDF.pdf');
+        return $pdf->stream('listadoPDF.pdf');
 
 
     }

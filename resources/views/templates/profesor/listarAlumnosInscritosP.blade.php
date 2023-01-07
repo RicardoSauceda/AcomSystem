@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Consulta Aceptados</title>
+	<title>Consulta Solicitudes</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -24,25 +24,45 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!--===============================================================================================-->
+<link href="/pmenu/style2.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="/pmenu/iconic2.css" media="screen" rel="stylesheet" type="text/css" />
+
+
 </head>
 <body>
+	<nav  style="background: #2F6895; position: fixed; width: 100%;" >
+		<ul class="menu" style=" height: 40px; display: flex; justify-content: center;">
+			
+			
+						
+			<li style="position: absolute; left: 20px;"><a style="color: white;" href="<?php echo route('proyecto') ?>"><span class="iconic arrow-left"></span> Regresar</a></li>			
+			<br><br>
 
-	<div class="container">
-		@if (Session::has('flash_message'))
+			<li  style="color: white; position: absolute; top: 15px;"><span class="iconic user"></span>{{ Auth::user()->nombre }}		
+			</li>
+			
+			<li style="position: absolute; right: 20px;"><a style="color: white;" href="<?php echo route('salir') ?>"><span class="iconic exit-fullscreen"></span>Cerrar Sesion</a></li>
 
-					<div class="alert alert-success {{ Session::has('flash_message_important') ? 'alert-important' : '' }}">
-						@if(Session::has('flash_message_important'))
-						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-						@endif
-						{{ session('flash_message')}}
-					
+		</ul>
+		<div class="clearfix"></div>
+	</nav>
 
-					</div>
+	<div style="height: 45px"></div>
+
+					@if (Session::has('flash_message'))
+
+						<div class="alert alert-success {{ Session::has('flash_message_important') ? 'alert-important' : '' }}">
+							@if(Session::has('flash_message_important'))
+							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+							@endif
+							{{ session('flash_message')}}
+						
+
+						</div>
 
 					@endif
-		
-	
-
+	<div class="container">
+				
   		<h2>Alumnos Aceptados al Proyecto {{$dato->nombre}}</h2>
   		                    
   		<table class="table table-striped table-bordered table-hover table-condensed">
@@ -66,12 +86,12 @@
 		    	<tr>
 		    		
 		    		<td>{{$solicitudes->apellidos}}</td>
-		    		<td>{{$solicitudes->alumno}}</td>
-		    		<td>{{$solicitudes->carrera}}</td>
+		    		<td>{{$solicitudes->nombre}}</td>
+		    		<td>{{$solicitudes->Carrera}}</td>
 					<td>{{$solicitudes->numControl}}</td>
 
 					<td>
-						<a class="btn btn-danger" href="{{route('eliminar',[$solicitudes->id_sol, $solicitudes->alumno]) }}"> Descartar</a> 
+						<a class="btn btn-danger" href="{{route('eliminar',[$solicitudes->id_sol, $solicitudes->nombre]) }}"> Descartar</a> 
 					 	
 					
 
@@ -83,11 +103,11 @@
 		  </table>
 		  {{ $solicitud->appends(Request::all())->render() }}
 	</div>
-
+<!-- 
 	<div class="text-center w-full" style="margin-top: 50px">
-		<!--a  class="btn btn-info" href="{{ URL::previous() }}">Regresar a los Proyectos</a-->
-		<a href="<?php echo route('proyecto') ?>" class="btn btn-info"> Regresar a los Proyectos</a>
-	</div>
+		a  class="btn btn-info" href="{{ URL::previous() }}">Regresar a los Proyectos</a
+		<a href="<?php //echo route('proyecto') ?>" class="btn btn-info"> Regresar a los Proyectos</a>
+	</div> -->
 
 <!--===============================================================================================-->	
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
@@ -98,6 +118,13 @@
 	<script src="vendor/select2/select2.min.js"></script>
 <!--===============================================================================================-->
 	<script src="js/main.js"></script>
+	<script src="//code.jquery.com/jquery.js"></script>
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>	
+	<script>
+		$('div.alert').not('.alert-important').delay(3000).slideUp(300);
+
+	</script>
+
 
 </body>
 </html>

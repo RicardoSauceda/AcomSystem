@@ -139,6 +139,7 @@ return [
         /*
          * Laravel Framework Service Providers...
          */
+        ConsoleTVs\Charts\ChartsServiceProvider::class,
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Illuminate\Bus\BusServiceProvider::class,
@@ -166,7 +167,6 @@ return [
         Laracasts\Flash\FlashServiceProvider::class,
         UxWeb\SweetAlert\SweetAlertServiceProvider::class,
         Khill\Lavacharts\Laravel\LavachartsServiceProvider::class,
-        ConsoleTVs\Charts\ChartsServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
 
 
@@ -209,6 +209,7 @@ return [
         'Broadcast' => Illuminate\Support\Facades\Broadcast::class,
         'Bus' => Illuminate\Support\Facades\Bus::class,
         'Cache' => Illuminate\Support\Facades\Cache::class,
+        'Charts' => ConsoleTVs\Charts\Charts::class,
         'Config' => Illuminate\Support\Facades\Config::class,
         'Cookie' => Illuminate\Support\Facades\Cookie::class,
         'Crypt' => Illuminate\Support\Facades\Crypt::class,
@@ -246,7 +247,6 @@ return [
         'Input' => Illuminate\Support\Facades\Input::class,
         'Alert' => UxWeb\SweetAlert\SweetAlert::class,
         'Lava' => Khill\Lavacharts\Laravel\LavachartsFacade::class,
-        'Charts' => ConsoleTVs\Charts\Facades\Charts::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
     ],
 

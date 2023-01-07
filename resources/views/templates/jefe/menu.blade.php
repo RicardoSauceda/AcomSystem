@@ -17,50 +17,38 @@
 
 	<nav style="background: #2F6895;">
 		<ul class="menu">
-			<!--li><a href="#"><span class="iconic home"></span> Inicio</a></li-->
-			<li><a style="color: white;" href="#"><span class="iconic plus-alt"></span> Registrar</a>
-				<ul>
-					<li><a style="color: black;" href="<?php echo route('regproy') ?>">Proyecto</a></li>
-					<li><a style="color: black;" href="<?php echo route('regprof') ?>">Profesor</a></li>
-				</ul>
+
+			<li><a style="color: white;" href="<?php echo route('regprof') ?>"><span class="iconic plus-alt"></span> Registrar Profesor</a>
 			</li>
-			<li><a style="color: white;" href="#"><span class="iconic magnifying-glass"></span>Gestionar</a>
-				<ul>
-					<li><a style="color: black;" href="<?php echo route('proyectos') ?>">Proyectos</a></li>
-					<li><a style="color: black;" href="<?php echo route('buscar') ?>">Profesores</a></li>
-					
-				</ul>
+			<li><a style="color: white;" href="<?php echo route('buscar') ?>"><span class="iconic magnifying-glass"></span>Gestionar Profesores</a>
+
 			</li>
 			<li><a style="color: white;" href="<?php echo route('autorizar') ?>"><span class="iconic document"></span>Autorizar actividades</a></li>
-			<!--<li><a style="color: white;" href="<?php //echo route('liberarJ') ?>"><span class="iconic document"></span> Liberar Alumnos</a></li>-->
-			<!-- <li><a style="color: white;" href="#"><span class="iconic calendar"></span></span> Estadísticas</a>
-				<ul>
-					<li><a style="color: black;" href="<?php echo route('pastel') ?>">Por Proyectos</a></li>
-				
-					<li><a style="color: black;" href="<?php echo route('ruta') ?>">Proyectos creados por Mes</a></li>
-					
-				</ul>
+			
+			<li><a style="color: white;" href="#"><span class="iconic calendar"></span></span>
+				Estadísticas</a>
+			<ul>
+				<li><a style="color: black;" href="<?php echo route('pastel'); ?>">Por Proyectos</a></li>
 
-			</li> -->
-			<!--<li><a style="color: white;" href="<?php //echo route('aprobadosJ') ?>"><span class="iconic user"></span>Listar Liberados</a>-->
-				
-			</li>
-			<li><a style="color: white;" href="<?php echo route('liberarJ') ?>"><span class="iconic document"></span> Liberar Alumnos</a></li>
-			<li><a style="color: white;" href="#"><span class="iconic calendar"></span></span> Estadísticas</a>
-				<ul>
-					<li><a style="color: black;" href="<?php echo route('pastel') ?>">Por Proyectos</a></li>
-				
-					<li><a style="color: black;" href="<?php echo route('ruta') ?>">Proyectos creados por Mes</a></li>
-					
-				</ul>
+				<li><a style="color: black;" href="<?php echo route('ruta'); ?>">Proyectos creados por Mes</a></li>
+
+			</ul>
 
 			</li>
-			<li><a style="color: white;" href="<?php echo route('aprobadosJ') ?>"><span class="iconic user"></span>Listar Liberados</a>
 				
 			</li>
-			<li><a style="color: white;" href="<?php echo route('config') ?>"><span class="iconic info"></span> Configuración</a></li>
-			<li><a style="color: white;" href="<?php echo route('msg') ?>"><span class="iconic chat"></span>Mensajes</a></li>
-			<li><a style="color: white;" href="<?php echo route('salir') ?>"><span class="iconic exit-fullscreen"></span>Cerrar Sesion</a></li>
+			<li><a style="color: white;" href="#"><span class="iconic info"></span> Configuración</a>
+				<ul>
+					<li><a style="color: black;" href="<?php echo route('config2') ?>">Editar Nombre</a></li>
+					<li><a style="color: black;" href="<?php echo route('config') ?>">Editar Usuario y Contraseña</a></li>
+				</ul>
+			</li>
+			
+
+			<li><a style="color: white;" href="<?php echo route('msg'); ?>"><span class="iconic chat"></span>Mensajes</a>
+			</li>
+					
+ 			<li><a style="color: white;" href="<?php echo route('salir') ?>"><span class="iconic exit-fullscreen"></span>Cerrar Sesion</a></li>
 			
 		</ul>
 		<div class="clearfix"></div>
@@ -71,7 +59,7 @@
 
 	<style type="text/css">
 		.wrap {
-			width: 1210px;
+			width: 860px;
 			margin: 4em auto;
 		}
 	</style>

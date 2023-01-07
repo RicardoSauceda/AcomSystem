@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\mensajes;
 use App\solicitudes;
+use DB;
 
 class mensajesController extends Controller
 {
@@ -20,14 +21,14 @@ class mensajesController extends Controller
     
          for ($i=0; $i <$num ; $i++) { 
                 
-                $aprobados = solicitudes::where([['id_creo','=',$user->id],['id_sol', '=', $id_sol[$i]]])->first();
-
+                $aprobados = DB::table('solicitudes')->select('solicitudes.id_usuario','solicitudes.idProy','solicitudes.id_usuario','usuario.usuario','solicitudes.id_creo','solicitudes.id_sol','solicitudes.id_usuario','proyectos.nombre','proyectos.codigo','proyectos.autor')->join('usuario','usuario.id','=','solicitudes.id_usuario')->join('proyectos','proyectos.id','=','solicitudes.idProy')->where([['solicitudes.id_creo','=',$user->id],['solicitudes.id_sol', '=', $id_sol[$i]]])->first();
+               
                 $mensajes = new mensajes();
-                $mensajes->proyecto=$aprobados->proyecto;
-                $mensajes->codigo=$aprobados->codigo_pro;
-                $mensajes->profesor=$aprobados->profesor;
+                $mensajes->proyecto=$aprobados->nombre;
+                $mensajes->codigo=$aprobados->codigo;
+                $mensajes->profesor=$aprobados->autor;
                 $mensajes->usuario=$aprobados->usuario;
-                $mensajes->msg_profesor = 'Haz sido '.$respuesta.' en el Proyecto';
+                $mensajes->msg_profesor = 'Haz sido '.$respuesta.' en la actividad';
                 $mensajes->tipo_MSG=$respuesta;
                 $mensajes->contador=1;
 

@@ -69,8 +69,8 @@
                 <tr>
                     
                     <td>{{$listado->apellidos}}</td>
-                    <td>{{$listado->alumno}}</td>
-                    <td>{{$listado->carrera}}</td>
+                    <td>{{$listado->nombre}}</td>
+                    <td>{{$listado->Carrera}}</td>
                     <td>{{$listado->numControl}}</td>
 
                    
